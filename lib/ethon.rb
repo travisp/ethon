@@ -1,9 +1,11 @@
 require 'logger'
 require 'ffi'
 require 'thread'
-begin
-  require 'mime/types'
-rescue LoadError
+unless defined?(Typhoeus) && Typhoeus::Config.try(:omit_require_mime_types)
+  begin
+    require 'mime/types'
+  rescue LoadError
+  end
 end
 require 'tempfile'
 
